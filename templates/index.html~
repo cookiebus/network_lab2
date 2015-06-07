@@ -3,7 +3,7 @@
 {% block title %}{{person.name}}{% endblock %}
 
 {% block content %}
-    
+    <img src="{{person.image}}" />
     {{ person.name }}<a href="{{person.url}}">{{person.url}}</a>
   
 {% endblock %}

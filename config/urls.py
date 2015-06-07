@@ -10,4 +10,7 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'face.views.home'),
+    url(r'^result/$', 'face.views.test'),
+    url(r'^learn/$', 'face.views.learn'),
+    url(r'^ingest/$', 'face.views.ingest'),
 )

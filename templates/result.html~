@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}选专业要看脸{% endblock %}
+
+{% block content %}
+      <!-- Three columns of text below the carousel -->
+      <div class="row">
+        <div class="col-lg-5">
+          <img class="img-rounded" src="../static/upload/{{image}}" alt="Generic placeholder image" width="240" height="240">
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-5">
+          <img class="img-rounded" src="../{{person.image}}" alt="Generic placeholder image" width="240" height="240">
+        </div>
+      </div><!-- /.row -->
+   <div>
+      <h4>你适合选择<strong> {{person.major}} </strong>专业</h4>
+      <h4>你以后的成就将会超越<strong> {{person.name}} </strong>！</h4>
+      <h4>你和<strong> {{person.name}} </strong>的相似度为<h1 class="text-danger" ><font color="#FF4040">{{similarity}}%</font></h1></h4>
+        <div class="progress">
+             <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="{{similarity}}" aria-valuemin="0" aria-valuemax="100" style="width: {{similarity}}%">
+            <span class="sr-only">{{similarity}}% Complete</span>
+             </div>  
+         </div>
+    　　  <h4>想了解TA?<a class="text-warning" href="{{person.url}}"><strong> <font color="#FFFF00">请戳这里</font> </strong></a>
+        <a href="/"><font color="#9AFF9A">再测一下>>>>>>></font></a>
+       </h4>
+    </div>
+{% endblock %}

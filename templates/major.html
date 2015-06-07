@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}选专业要看脸{% endblock %}
+
+{% block content %}
+<h2 align="center">我最适合的专业测试</h2>
+<div id = form_container>
+	<form action="">
+         <h3>上传我的照片</h3><input type="file" accept="image/*"><br/> 
+         <label>我的总分:</label>
+         <input name="grade" type="number"></input>
+         <br/>
+         <br/>
+         <label>我学的是：</label>
+         <br/>
+         <input name="category" type="radio" value = "art">文科</input>
+         <input name="category" type="radio" value = "science">理科</input>
+         <br/>
+         <br/>
+         <label>我所在的省份：</label>
+         <select>
+ 			<option value="anhui">安徽</option>
+            <option value="beijing" selected = "selected">北京</option>
+  			<option value="chongqi">重庆</option>
+  			<option value="fujian">福建</option>
+            <option value="gansu">甘肃</option>
+            <option value="guangdong">广东</option>
+            <option value="guangxi">广西</option>
+            <option value="guizhou">贵州</option>
+            <option value="hainan">海南</option>
+            <option value="hebei">河北</option>
+            <option value="henan">河南</option>
+            <option value="heilongjiang">黑龙江</option>
+            <option value="hubei">湖北</option>
+            <option value="hunan">湖南</option>
+            <option value="jilin">吉林</option>
+            <option value="jiangsu">江苏</option>
+            <option value="jiangxi">江西</option>
+            <option value="liaoning">辽宁</option>
+            <option value="neimenggu">内蒙古</option>
+            <option value="ningxia">宁夏</option>
+            <option value="qinghai">青海</option>
+            <option value="shandong">山东</option>
+            <option value="shanxi">山西</option>
+            <option value="shan3xi">陕西</option>
+            <option value="shanghai">上海</option>
+            <option value="sichuan">四川</option>
+            <option value="tianjin">天津</option>
+            <option value="xizang">西藏</option>
+            <option value="xinjiang">新疆</option>
+            <option value="yunnan">云南</option>
+            <option value="zhejiang">浙江</option>
+		 </select>
+         <br/>
+         <br/>
+         <label>我打算报考的大学:</label>
+         <input name="university" type="text"></input>
+         <br/>
+         <br/>
+         <br/>
+         <br/>
+         <br/>
+         <br/>
+         <br/>
+         <input name="submit" type="submit" value="开始测试"/>
+         <input name="clean" type="reset" value="清空重填"> 
+    
+    </form>
+
+</div>
+
+{% endblock %}
