@@ -5,6 +5,7 @@ import json
 from facepp.facepp import API, File
 import os, os.path, sys
 import random
+import datetime
 
 reload(sys) 
 sys.setdefaultencoding('utf-8')
@@ -109,18 +110,22 @@ def home(request):
 
 def test(request):
     form = PhotoForm()
-
     if request.method == "POST":
+        #request.FILES['image'] = datetime.datetime.now()
         form = PhotoForm(request.POST, request.FILES)
+        print form
         if form.is_valid():
-            form.save()
+            photo = form.save()
+        else:
+            return render(request, 'home.html', locals())
         print form.is_valid()
 
-    image = request.FILES['image']
+    #image = request.FILES['image']
+    image = photo.image
     print image
 
     try:
-        result = api.detection.detect(img = File('./static/upload/%s' % request.FILES['image']), mode = 'oneface')
+        result = api.detection.detect(img = File('./%s' % image), mode = 'oneface')
     except:
         result = dict()
         result['face'] = []
