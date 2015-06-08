@@ -40,7 +40,7 @@ def insert_db(name, major, url, path):
         person.face_id = 'NULL'
         person.save()
     except:
-        pass
+        print name, major, url, path
 
 
 def ingest(request):
@@ -49,8 +49,8 @@ def ingest(request):
     for parent,dirnames,filenames in os.walk(PICPATH):
         if 'name.txt' in filenames:
             major = parent[parent.find("pictures/") + 9:]
-            major = major[:major.find('/')]
-            #print parent, filenames
+            if major.rfind("/") != -1:
+                major = major[:major.rfind("/")]
             file = open(parent + "/name.txt", "r")
             while 1:
                 line = file.readline()
@@ -68,12 +68,15 @@ def ingest(request):
                             t = (name + '.jpg').find(ff) != -1
                             if t:
                                 insert_db(name, major, url, path)
+                                cnt += 1
+                                person_list[cnt] = name + '-' + path
                             else:
                                 t = (name + '-1.jpg').find(ff) != -1
                                 if t:
                                     insert_db(name, major, url, path)
-                            cnt += 1
-                            person_list[cnt] = name+ '-' + path
+                                    cnt += 1
+                                    person_list[cnt] = name + '-' + path
+                            
             file.close()
 
     return HttpResponse(json.dumps(person_list))
@@ -84,6 +87,8 @@ def learn(request):
     
     d = {}
     for person in person_list:
+        if person.face_id != "NULL":
+            continue
         try:
             result = api.detection.detect(img = File('./%s' % person.image), mode = 'oneface')
             person.face_id = result['face'][0]['face_id'] 
@@ -114,7 +119,12 @@ def test(request):
     image = request.FILES['image']
     print image
 
-    result = api.detection.detect(img = File('./static/upload/%s' % request.FILES['image']), mode = 'oneface')
+    try:
+        result = api.detection.detect(img = File('./static/upload/%s' % request.FILES['image']), mode = 'oneface')
+    except:
+        result = dict()
+        result['face'] = []
+    
     if len(result['face']) == 0:
         face_id = 'NULL'
         similarity = random.randint(100000, 300000) / 10000.0

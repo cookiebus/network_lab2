@@ -138,7 +138,7 @@ class API(object):
     retry_delay = None
 
     def __init__(self, key, secret, srv = None,
-            decode_result = True, timeout = 30, max_retries = 10,
+            decode_result = True, timeout = 10, max_retries = 2,
             retry_delay = 5):
         """:param srv: The API server address
         :param decode_result: whether to json_decode the result

@@ -3,7 +3,7 @@ from face.models import Person, Photo
 
 
 class PersonAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'url', 'face_id')
+    list_display = ('id', 'name', 'face_id', 'url')
 
 class PhotoAdmin(admin.ModelAdmin):
     list_display = ('id', )
